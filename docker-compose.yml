@@ -1,0 +1,36 @@
+version: '3.7'
+
+volumes:
+  goaccess_report: { driver: local }
+
+services:
+
+  goaccess_server:
+    build:
+      context: ./goaccess
+      dockerfile: Dockerfile
+    image: eduardoreno/goaccess_server
+    restart: unless-stopped
+    container_name: goaccess_server
+    ports:
+      - 7890:7890
+    volumes:
+      - ./goaccess.conf:/srv/data/goaccess.conf:ro
+      - goaccess_report:/srv/report
+    # Arquivo Monitorado
+      - ../proxy_interno/logs/access.log:/srv/logs/access.log:ro
+    environment:
+      - "TZ=America/Sao_Paulo"
+
+  goaccess_web:
+    image: nginx
+    restart: unless-stopped
+    container_name: goaccess_web
+    ports:
+      - 7891:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - .htpasswd:/etc/nginx/.htpasswd:ro
+      - goaccess_report:/srv/report
+    depends_on:
+      - goaccess_server

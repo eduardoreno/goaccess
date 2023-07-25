@@ -1,0 +1,3 @@
+Comando para cadastrar usuários para acesso:
+sudo sh -c "echo -n 'user:' >> .htpasswd"
+sudo sh -c "openssl passwd -apr1 >> .htpasswd"
