@@ -19,8 +19,8 @@ services:
     volumes:
       - ./server/goaccess.conf:/srv/data/goaccess.conf:ro
       - goaccess_report:/srv/report
-    # Arquivo Monitorado
-      - ../proxy_interno/logs/access.log:/srv/logs/access.log:ro
+    # Target log
+      - ${TARGET_LOG}:ro
 
   goaccess_web:
     image: nginx
