@@ -1,3 +1,5 @@
-Comando para cadastrar usuários para acesso:
-sudo sh -c "echo -n 'user:' >> .htpasswd"
-sudo sh -c "openssl passwd -apr1 >> .htpasswd"
+Goaccess WEB and Server in docker container.
+
+Add user command:
+sudo sh -c "echo -n 'user:' >> ./web.htpasswd"
+sudo sh -c "openssl passwd -apr1 >> ./web.htpasswd"
