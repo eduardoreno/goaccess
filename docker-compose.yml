@@ -9,7 +9,7 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile
-    image: eduardoreno/goaccess_server
+    image: eduardoreno/goaccess_server:bookworm
     restart: unless-stopped
     container_name: goaccess_server
     ports:
